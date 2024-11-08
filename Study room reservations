@@ -1,0 +1,64 @@
+#include <stdio.h>
+
+int main(void) {
+    int rooms[10] = {0};  // 0 indicates the room is available, 1 indicates it's reserved
+    int input;
+    int roomNumber;
+
+    while (1) {
+        printf("Welcome to the Study-Room-Reservation System.\n");
+        printf("Please Select an Option.\n------------------------------------\n");
+        printf("1. Reserve study room.\n");
+        printf("2. Leave study room.\n");
+        printf("3. Check Availability.\n");
+        printf("4. Exit.\n");
+
+        scanf("%d", &input);
+
+        if (input == 1) {
+            printf("Please enter the room number you would like to reserve (1-10): \n");
+            scanf("%d", &roomNumber);
+
+            if (roomNumber < 1 || roomNumber > 10) {
+                printf("Invalid room number. Please enter a number between 1 and 10.\n");
+            } else if (rooms[roomNumber - 1] == 1) {
+                printf("Room %d is already reserved.\n", roomNumber);
+            } else {
+                rooms[roomNumber - 1] = 1;
+                printf("Room %d has been reserved.\n", roomNumber);
+            }
+
+        } else if (input == 2) {
+            printf("Please enter the room number you would like to leave (1-10): \n");
+            scanf("%d", &roomNumber);
+
+            if (roomNumber < 1 || roomNumber > 10) {
+                printf("Invalid room number. Please enter a number between 1 and 10.\n");
+            } else if (rooms[roomNumber - 1] == 0) {
+                printf("Room %d is already available.\n", roomNumber);
+            } else {
+                rooms[roomNumber - 1] = 0;
+                printf("Room %d has been left and is now available.\n", roomNumber);
+            }
+
+        } else if (input == 3) {
+            printf("The following rooms are available:\n");
+            for (int i = 0; i < 10; i++) {
+                if (rooms[i] == 0) {
+                    printf("Room %d\n", i + 1);
+                }
+            }
+
+        } else if (input == 4) {
+            printf("Exiting the Study-Room-Reservation System. Goodbye!\n");
+            break;
+
+        } else {
+            printf("Invalid Command.\n");
+        }
+
+        printf("\n");
+    }
+
+    return 0;
+}
